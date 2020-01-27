@@ -23,7 +23,7 @@ YOGA_CLASS=['agnistambhasana', 'ananda balasana', 'ardha pincha mayurasana',
        'virabhadrasana iii']
 
 gan_list=['14012020_2131_45','epoch-4950-03012020_1216_55','15012020_2205_37','16012020_1756_32','16012020_2257_39'] #replace with final 5 class models
-#gan_list = []
+
 img_width = 64
 img_height = 64
 model_dir_path = '/dev/shm/shashank3110'+ '/final_models'
@@ -44,18 +44,9 @@ pickle_path="/home/shashank3110/keras-text-to-image/demo/models/cv_pickle.pk"
 with open(pickle_path,"rb") as f:
     cv=pickle.load(f)
 
-# for f in os.listdir(txt_dir_path):
-#         filepath = os.path.join(txt_dir_path, f)
-#         if os.path.isfile(filepath) and f.endswith('.txt'):
-#             name = f.split('.')[0]
-#             names.append(name)
-#             with open(filepath, 'rt') as tfile:
-#                 texts[name] = tfile.read()
+
 gan = DCGan()
 
-# image = img_to_array(load_img(img_path, target_size=(img_width, img_height)))
-# image = (image.astype(np.float32) / 255) * 2 - 1
-# Load text model get classname from text description and select corresponding model
 texts = []
 for text in texts:
     ssim_scores=[]

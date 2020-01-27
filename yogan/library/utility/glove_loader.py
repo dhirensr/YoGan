@@ -3,7 +3,7 @@ import os
 import zipfile
 import numpy as np
 
-from keras_text_to_image.library.utility.download_utils import reporthook
+from yogan.library.utility.download_utils import reporthook
 
 
 def download_glove(data_dir_path, to_file_path):

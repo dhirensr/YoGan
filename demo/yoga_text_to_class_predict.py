@@ -32,7 +32,7 @@ def make_model():
     model.add(Dense(64,activation='relu'))
     model.add(Dense(34,activation='softmax'))
     opt = tf.optimizers.RMSprop(learning_rate= learning_rate)
-    #model.compile(optimizer=opt,loss=tf.keras.losses.CategoricalCrossentropy(),metrics=['accuracy'])
+
     model.build(input_shape=(1,405)) # 405 is the size of bow representation
     return model
 
@@ -42,9 +42,7 @@ def bow_transform(df=None):
     Args: df : train/dev/text dataframe
     Returns: Bag of Words representation of X.
     '''
-    # if isinstance(df,str):
-    #   text = df
-    # else:
+    
     text = df['text']
     token = RegexpTokenizer(r'[a-zA-Z0-9]+')
     cv = CountVectorizer(lowercase=True,stop_words='english',ngram_range = (1,1),tokenizer = token.tokenize)
@@ -52,9 +50,7 @@ def bow_transform(df=None):
     text_counts= cv.transform(text).toarray()
     vocab = cv.vocabulary_
     print(vocab)
-    #cv_without_stop = CountVectorizer(lowercase=True,stop_words=None,ngram_range = (1,1),tokenizer = token.tokenize)
-    #text_counts_without_stop=cv_without_stop.fit_transform(df['text']).toarray()
-    #cv_without_stop.vocabulary_
+    
     X = text_counts
     return X,cv
 
@@ -115,7 +111,7 @@ def run():
     y_predicted = model.predict(sample)
 
 
-    #print(np.argmax(y_predicted),sample)
+
 
     model.summary()
 
@@ -133,23 +129,6 @@ def run():
     with open(pickle_path,"wb") as f:
         pickle.dump(cv,f)
 
-#  Subclassed model (18/1/2020)
-# class Text_Model(Model):
-#     def __init__(self):
-#         super(Text_Model,self).__init__()
-#         self.l1 =Dense(128,activation='relu')#input_shape=()
-#         self.l2 =Dense(64,activation='relu')
-#         self.l3 =Dense(34,activation='softmax')
-#     def call(self,inputs):
-#         # print("Reached Here !!!")
-#         x= inputs
-#         # print("Not yet!!!")
-#         output = self.l3(self.l2(self.l1(x)))
-#         return output
-
-# Here we are using Functional Model as we cannot save subclassed model weights
-# as .h5 file (18/1/2020)
-
 
 
 
@@ -158,7 +137,7 @@ def load_text_model(yoga_text,pickle_path,yoga_class):
     model=make_model()
     with open(pickle_path,"rb") as f:
         cv=pickle.load(f)
-#     sample2="From Box or Cakravākāsana, the ribcage is lifted with a gentle sway in the low back. The eyes are soft and the gaze is to the sky.  The tailbone lifts up into dog tilt."
+
     yoga_text = cv.transform([yoga_text]).toarray()
     model.load_weights("/home/shashank3110/keras-text-to-image/demo/models/text_model_18012020_1127_26.h5")
     return yoga_class[np.argmax(model.predict(yoga_text))]

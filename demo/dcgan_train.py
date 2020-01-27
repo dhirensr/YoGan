@@ -18,11 +18,10 @@ def main():
     img_height = 64#256 large size of 256 leads to  ram alloc error
     img_channels = 3
 
-    from keras_text_to_image.library.dcgan import DCGan
-    from keras_text_to_image.library.utility.img_cap_loader import load_normalized_img_and_its_text
+    from yogan.library.dcgan import DCGan
+    from yogan.library.utility.img_cap_loader import load_normalized_img_and_its_text
 
     image_label_pairs = load_normalized_img_and_its_text(img_dir_path, txt_dir_path, img_width=img_width, img_height=img_height)
-    #print(image_label_pairs)
     shuffle(image_label_pairs)
 
     gan = DCGan()

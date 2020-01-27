@@ -31,40 +31,23 @@ def main():
     img_dir_path = current_dir + '/data/yoga/img_aug_test/' #/data/yoga/img_aug'
     txt_dir_path = current_dir + '/data/yoga/txt'
     model_dir_path = '/dev/shm/shashank3110'+ '/final_models'
-    #model_dir_path = current_dir + '/models'
 
     img_width = 64
     img_height = 64
 
-    from keras_text_to_image.library.dcgan import DCGan
-    from keras_text_to_image.library.utility.image_utils import img_from_normalized_img
-    from keras_text_to_image.library.utility.img_cap_loader import load_normalized_img_and_its_text
-    from keras_text_to_image.library.utility.ssim import ssim_score
+    from yogan.library.dcgan import DCGan
+    from yogan.library.utility.image_utils import img_from_normalized_img
+    from yogan.library.utility.img_cap_loader import load_normalized_img_and_its_text
+    from yogan.library.utility.ssim import ssim_score
 
     image_label_pairs = load_normalized_img_and_its_text(img_dir_path, txt_dir_path, img_width=img_width, img_height=img_height)
-    #print(f"image label pairs={image_label_pairs}")
-    #print(f"Result length of image label pairs={len(result)}")
-    #for i in range(10):
     shuffle(image_label_pairs)
 
-    #gan = DCGan()
-
     gan = DCGan()
-    #gan2 = DCGan()
-    #gan3 = DCGan()
-    #gan4 = DCGan()
-    #gan5 = DCGan()
 
-    #gan1.load_model(model_dir_path,'14012020_2131_45') #bitilasana
-    #gan2.load_model(model_dir_path,'epoch-4950-03012020_1216_55') # pasasana
-    #gan3.load_model(model_dir_path,'15012020_2205_37') # agnistambhasana
-    #gan4.load_model(model_dir_path,'16012020_1756_32') #bhujapidasana
-    #gan5.load_model(model_dir_path,'16012020_2257_39') # matsyasana
-    #gan.load_model(model_dir_path)
-    #gan_list=[gan1,gan2,gan3,gan4,gan5]
     gan_list=['14012020_2131_45','epoch-4950-03012020_1216_55','15012020_2205_37','16012020_1756_32','16012020_2257_39']
 
-    ### Added on 19/01/2020
+
     class_list=['pasasana','agnistambhasana','bhujapidasana','bitilasana','matsyasana']
     model_dict = dict(zip(class_list,gan_list))
     ###
@@ -76,11 +59,9 @@ def main():
         normalized_image = image_label_pair[0]
         text = image_label_pair[1]
 
-
-        #print(text)
         image = img_from_normalized_img(normalized_image)
         normalized_image_dir=os.getcwd() + '/data/outputs/' + 'normalized/' + 'generated-' + str(i) +"-"+dt_string + '-0.png'
-        #print(current_dir + '/data/outputs/')
+
 
         image.save(normalized_image_dir)
         ### Added on 19/01/2020
@@ -94,7 +75,7 @@ def main():
         k=0
         generated_images_dir=[]
         ssim_scores=[]
-        #for j in range(1):
+
         for model_name in gan_list:
             gan.load_model(model_dir_path,model_name)
             generated_images = gan.generate_image_from_text(text)
@@ -102,7 +83,6 @@ def main():
             generated_images.save(generated_image_dir)
             generated_images_dir.append(generated_image_dir)
             k+=1
-        #print(normalized_image_dir,generated_images_dir)
 
         for j in generated_images_dir:
             ssim_scores.append([j,ssim_score(normalized_image_dir,j)])
