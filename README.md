@@ -5,20 +5,21 @@ GAN For Yoga Text Description to Image
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
-### Prerequisites
+## Prerequisites
 
 * Python 3
 
 
 
-### Installing
+## Installing
 
 
 ```
 pip3 install requirements.txt
 ```
 After all the needed packages are install one can run the jupyter notebook directly to infer from all the models.
-# To Run Demo and generate images
+
+## To Run Demo and generate images
 ```
 cd Yogan/demo
 jupyter-notebook yogan_demo.ipynb
@@ -37,14 +38,14 @@ We have uploaded all the models in the directory final_models. If one wants to t
 
 ## Built With
 
-* [Tensorflow](https://www.tensorflow.org/) - for backend 
+* [Tensorflow](https://www.tensorflow.org/) - for backend with Keras
 * [Scikit Image](https://scikit-image.org/docs/dev/api/skimage.html) - Image processing library
 * [Keras](https://keras.io/) - Deep Learning framework
 
 
 ## Contributing
 
-1. Fork it (<https://github.com/yourname/yourproject/fork>)
+1. Fork it (<https://github.com/dhirensr/YoGan/fork>)
 2. Create your feature branch (`git checkout -b feature/fooBar`)
 3. Commit your changes (`git commit -am 'Add some fooBar'`)
 4. Push to the branch (`git push origin feature/fooBar`)
@@ -53,14 +54,14 @@ We have uploaded all the models in the directory final_models. If one wants to t
 ## Authors
 
 * **Dhiren Serai** - *Author* - [Github Profile](https://github.com/dhirensr)
-* **Shashank Salian** - *Author* - [Github Profile](https://github.com/dhirensr)
+* **Shashank Salian** - *Author* - [Github Profile](https://github.com/shashank3110)
 
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/dhirensr/YoGan/graphs/contributors) who participated in this project.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
 
 ## Acknowledgments
 
