@@ -22,7 +22,7 @@ After all the needed packages are install one can run the jupyter notebook direc
 
 ## To Run Demo and generate images
 ```
-cd Yogan/demo
+cd YoGan/demo
 jupyter-notebook yogan_demo.ipynb
 ```
 
