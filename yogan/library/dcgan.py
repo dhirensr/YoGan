@@ -257,4 +257,4 @@ class DCGan(object):
     def save_snapshots(self, generated_images, snapshot_dir_path, epoch, batch_index):
         image = combine_normalized_images(generated_images)
         img_from_normalized_img(image).save(
-            os.path.join(snapshot_dir_path, DCGan.model_name + '-' + str(epoch) + "-" + str(batch_index)+ "-single-class-matsyasanaf-" +dt_string + ".png"))
+            os.path.join(snapshot_dir_path, DCGan.model_name + '-' + str(epoch) + "-" + str(batch_index) +dt_string + ".png"))

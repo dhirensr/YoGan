@@ -7,7 +7,7 @@ from PIL import Image
 import datetime,pickle
 from skimage.io import imsave
 from yoga_text_to_class_predict import load_text_model
-pickle_path="/home/shashank3110/keras-text-to-image/demo/models/cv_pickle.pk"
+pickle_path= os.getcwd()+"/final_models/cv_pickle.pk"
 with open(pickle_path,"rb") as f:
     cv=pickle.load(f)
 YOGA_CLASS=['agnistambhasana', 'ananda balasana', 'ardha pincha mayurasana',
@@ -21,7 +21,7 @@ YOGA_CLASS=['agnistambhasana', 'ananda balasana', 'ardha pincha mayurasana',
        'supta baddha konasana', 'tolasana', 'urdhva mukha svanasana',
        'ustrasana', 'uttana shishosana', 'utthita parsvakonasana', 'vajrasana',
        'virabhadrasana iii']
-pwd=os.getcwd()
+
 dt_string = datetime.datetime.now().strftime("%d%m%Y_%H%M_%S")
 def main():
     current_dir = os.path.dirname(__file__)
@@ -30,7 +30,7 @@ def main():
 
     img_dir_path = current_dir + '/data/yoga/img_aug_test/' #/data/yoga/img_aug'
     txt_dir_path = current_dir + '/data/yoga/txt'
-    model_dir_path = '/dev/shm/shashank3110'+ '/final_models'
+    model_dir_path = os.getcwd()+ '/final_models'
 
     img_width = 64
     img_height = 64

@@ -12,7 +12,7 @@ def main():
 
     img_dir_path = current_dir + '/data/yoga/img_aug'
     txt_dir_path = current_dir + '/data/yoga/txt'
-    model_dir_path = '/dev/shm/shashank3110' + '/models'
+    model_dir_path = current_dir + '/models'
 
     img_width = 64#256
     img_height = 64#256 large size of 256 leads to  ram alloc error

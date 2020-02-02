@@ -42,7 +42,7 @@ def bow_transform(df=None):
     Args: df : train/dev/text dataframe
     Returns: Bag of Words representation of X.
     '''
-    
+
     text = df['text']
     token = RegexpTokenizer(r'[a-zA-Z0-9]+')
     cv = CountVectorizer(lowercase=True,stop_words='english',ngram_range = (1,1),tokenizer = token.tokenize)
@@ -50,14 +50,14 @@ def bow_transform(df=None):
     text_counts= cv.transform(text).toarray()
     vocab = cv.vocabulary_
     print(vocab)
-    
+
     X = text_counts
     return X,cv
 
 def run():
     tlist = []
     classes = []
-    path="/home/shashank3110/keras-text-to-image/demo/data/yoga/txt"
+    path=os.getcwd()+"/data/yoga/txt"
     files = os.listdir(path)
     print(files)
     for fname in files:
@@ -119,12 +119,12 @@ def run():
 
 
     dt_string = datetime.datetime.now().strftime("%d%m%Y_%H%M_%S")
-    model.save("/home/shashank3110/keras-text-to-image/demo/models/text_model_"+dt_string+".h5")
+    model.save(os.getcwd()+"/final_models/text_model_"+dt_string+".h5")
 
 
     #Using Functional instead of subclassed model and model save and load code added.
 
-    pickle_path="/home/shashank3110/keras-text-to-image/demo/models/cv_pickle.pk" # to save bow count vectorizer object
+    pickle_path=os.getcwd()+"/final_models/cv_pickle.pk" # to save bow count vectorizer object
 
     with open(pickle_path,"wb") as f:
         pickle.dump(cv,f)
@@ -139,5 +139,5 @@ def load_text_model(yoga_text,pickle_path,yoga_class):
         cv=pickle.load(f)
 
     yoga_text = cv.transform([yoga_text]).toarray()
-    model.load_weights("/home/shashank3110/keras-text-to-image/demo/models/text_model_18012020_1127_26.h5")
+    model.load_weights(os.getcwd()+"/final_models/text_model_18012020_1127_26.h5")
     return yoga_class[np.argmax(model.predict(yoga_text))]

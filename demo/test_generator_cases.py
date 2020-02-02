@@ -26,9 +26,9 @@ gan_list=['14012020_2131_45','epoch-4950-03012020_1216_55','15012020_2205_37','1
 
 img_width = 64
 img_height = 64
-model_dir_path = '/dev/shm/shashank3110'+ '/final_models'
-ground_truth_img_dir = 'keras-text-to-image/demo/data/yoga/img/'
-# txt_dir_path = 'keras-text-to-image/demo/data/yoga/test_txt/'
+model_dir_path = os.getcwd()+ '/final_models'
+ground_truth_img_dir = os.getcwd()+'/data/yoga/img/'
+
 for model_fname in os.listdir(model_dir_path):
     gan_list.append(model_fname.split('h5')[0])
 
@@ -40,7 +40,7 @@ names = []
 class_list=['pasasana','agnistambhasana','bhujapidasana','bitilasana','matsyasana']
 model_dict = dict(zip(class_list,gan_list))
 dt_string = datetime.datetime.now().strftime("%d%m%Y_%H%M_%S")
-pickle_path="/home/shashank3110/keras-text-to-image/demo/models/cv_pickle.pk"
+pickle_path=os.getcwd()+"/final_models/cv_pickle.pk"
 with open(pickle_path,"rb") as f:
     cv=pickle.load(f)
 
