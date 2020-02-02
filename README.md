@@ -1,6 +1,7 @@
 # YoGan
 GAN For Yoga Text Description to Image 
 
+![YoGan description image](https://github.com/dhirensr/YoGan/blob/master/github_repo_yogan.png)
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
