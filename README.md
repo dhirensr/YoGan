@@ -1,77 +1,45 @@
 # YoGan
 GAN For Yoga Text Description to Image 
 
-# To Run Demo and generate images
-cd Yogan/demo
-jupyter-notebook yogan_demo.ipynb
-
-Note: generated images are saved in Yogan/demo/data/outputs 
-You can edit these paths in this notebook.
-
-
-# YoGan
-
-One Paragraph of project description goes here
-
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
+* Python 3
 
-```
-Give examples
-```
+
 
 ### Installing
 
-A step by step series of examples that tell you how to get a development env running
-
-Say what the step will be
 
 ```
-Give the example
+pip3 install requirements.txt
+```
+After all the needed packages are install one can run the jupyter notebook directly to infer from all the models.
+# To Run Demo and generate images
+```
+cd Yogan/demo
+jupyter-notebook yogan_demo.ipynb
 ```
 
-And repeat
+Note: generated images are saved in YoGan/demo/data/outputs 
+You can edit these paths in this notebook.
 
-```
-until finished
-```
 
-End with an example of getting some data out of the system or using it for a little demo
+## Changing the dataset and few hyperparameters
 
-## Running the tests
+In the file dcgan_train.py we have the option to change the files of the dataset and also few more parameters like image width,height and channels of the image, the noise vector size ,number of epochs and batch size.
 
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
+## Training the model
+We have uploaded all the models in the directory final_models. If one wants to train from scratch and generate the model then one can use dcgan_train.py
 
 ## Built With
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+* [Tensorflow](https://www.tensorflow.org/) - for backend 
+* [Scikit Image](https://scikit-image.org/docs/dev/api/skimage.html) - Image processing library
+* [Keras](https://keras.io/) - Deep Learning framework
 
 
 ## Contributing
@@ -84,8 +52,8 @@ Add additional notes about how to deploy this on a live system
 
 ## Authors
 
-* **Dhiren Serai** - *Initial work* - [PurpleBooth](https://github.com/dhirensr)
-* **Shashank Salian** - *Initial work* - [PurpleBooth](https://github.com/dhirensr)
+* **Dhiren Serai** - *Author* - [Github Profile](https://github.com/dhirensr)
+* **Shashank Salian** - *Author* - [Github Profile](https://github.com/dhirensr)
 
 
 See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
