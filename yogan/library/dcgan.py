@@ -1,3 +1,7 @@
+"""
+GAN model architecture file.
+Model can be modified here in create_model function.
+"""
 import tensorflow as tf
 from keras.models import Model, Sequential
 from keras.layers import Input, Dense, Reshape, concatenate,Conv2DTranspose
@@ -45,7 +49,7 @@ class DCGan(object):
         self.random_input_dim = 100
         self.text_input_dim = 100
         self.config = None
-        self.glove_source_dir_path = './very_large_data'
+        self.glove_source_dir_path = './glove_dir'
         self.glove_model = GloveModel()
 
     @staticmethod
@@ -60,8 +64,10 @@ class DCGan(object):
 
     def create_model(self):
             '''
-            Prototyping section to be run on Saturday Dec 28,2019
+            Modify the generator and discriminator moodel architecture here.
             '''
+            
+            ## generator architecture
             init_img_width = self.img_width // 4
             init_img_height = self.img_height // 4
             random_input = Input(shape=(self.random_input_dim,))
@@ -76,20 +82,20 @@ class DCGan(object):
             generator_layer = LeakyReLU()(generator_layer)
             generator_layer = Reshape((init_img_width, init_img_height, 256),
                                       )(generator_layer)
+            
+
+
             #block 1
-
-
-            #block 2
             generator_layer = Conv2DTranspose(128, (5, 5), strides=(1, 1), padding='same', use_bias=False)(generator_layer)
             generator_layer = BatchNormalization()(generator_layer)
             generator_layer = LeakyReLU()(generator_layer)
 
-            #block 3
+            #block 2
             generator_layer = Conv2DTranspose(64, (5, 5), strides=(2, 2), padding='same', use_bias=False)(generator_layer)
             generator_layer = BatchNormalization()(generator_layer)
             generator_layer = LeakyReLU()(generator_layer)
 
-            #block 4
+            #block 3
             generator_layer = Conv2DTranspose(3, (5, 5), strides=(2, 2), padding='same', use_bias=False)(generator_layer)
             generator_layer = BatchNormalization()(generator_layer)
             generator_output = Activation('tanh')(generator_layer)
@@ -110,13 +116,12 @@ class DCGan(object):
             text_layer2 = Dense(1024)(text_input2)
             img_input2 = Input(shape=(self.img_width, self.img_height, self.img_channels))
 
-            #self.img_channels
+            ## discriminator architecture
             #### block 1
             img_layer2 = Conv2D(64, kernel_size=5,strides=(2, 2), padding='same')(img_input2)
             img_layer2 = LeakyReLU()(img_layer2)
             img_layer2 = MaxPooling2D(pool_size=(2, 2))(img_layer2)
-            #img_layer2 = Dropout(0.3)(img_layer2)
-           #img_layer2 = MaxPooling2D(pool_size=(2, 2))(img_layer2)
+
             #### block 2
             img_layer2 = Conv2D(128, kernel_size=(5, 5),strides=(2, 2), padding='same')(img_layer2)
             img_layer2 = LeakyReLU()(img_layer2)
