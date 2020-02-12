@@ -37,7 +37,7 @@ def main():
     gan.img_height = img_height
     gan.img_channels = img_channels
     gan.random_input_dim = 100
-    gan.glove_source_dir_path = './very_large_data' # glove embeddings file
+    gan.glove_source_dir_path = './glove_dir' # glove embeddings file
 
     batch_size = 51
     epochs = 8000
