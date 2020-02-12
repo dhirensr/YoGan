@@ -139,6 +139,7 @@ def load_text_model(yoga_text,pickle_path,yoga_class):
         cv=pickle.load(f)
 
     yoga_text = cv.transform([yoga_text]).toarray()
-    model.load_weights(os.getcwd()+"/final_models/text_model_18012020_1127_26.h5")
+    model.load_weights(pickle_path)
+    #os.getcwd()+"/final_models/text_model_18012020_1127_26.h5"
     # use existing text model pickle or else use your own  pickle_path above
     return yoga_class[np.argmax(model.predict(yoga_text))]
