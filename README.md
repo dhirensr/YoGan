@@ -35,7 +35,23 @@ You can edit these paths in this notebook.
 In the file dcgan_train.py we have the option to change the files of the dataset and also few more parameters like image width,height and channels of the image, the noise vector size ,number of epochs and batch size.
 
 ## Training the model
-We have uploaded all the models in the directory final_models. If one wants to train from scratch and generate the model then one can use dcgan_train.py
+We have uploaded all the models in the directory final_models. If one wants to train from scratch and generate the model then one can use the following script:
+* YoGan/demo/dcgan_train.py
+
+## Data directories
+##### Image data:
+* YoGan/demo/data/yoga/img
+
+##### Image data after augmentation
+* YoGan/demo/data/yoga/img_aug_train
+
+##### Text data
+* YoGan/demo/data/yoga/txt
+
+## Modify Architecture
+To tweak the architectecture edit the following script:
+##### YoGan/yogan/library/dcgan.py
+
 
 ## Built With
 
