@@ -1,3 +1,7 @@
+'''
+Inference script non-jupyter version  for jupyter version use YoGan/demo/yoga_demo.ipynb
+'''
+
 import numpy as np
 from random import shuffle
 import os
@@ -7,6 +11,8 @@ from PIL import Image
 import datetime,pickle
 from skimage.io import imsave
 from yoga_text_to_class_predict import load_text_model
+
+# text based NN model for Approach 1 refer line 77
 pickle_path= os.getcwd()+"/final_models/cv_pickle.pk"
 with open(pickle_path,"rb") as f:
     cv=pickle.load(f)
@@ -23,6 +29,7 @@ YOGA_CLASS=['agnistambhasana', 'ananda balasana', 'ardha pincha mayurasana',
        'virabhadrasana iii']
 
 dt_string = datetime.datetime.now().strftime("%d%m%Y_%H%M_%S")
+
 def main():
     current_dir = os.path.dirname(__file__)
     sys.path.append(os.path.join(current_dir, '..'))
@@ -30,7 +37,7 @@ def main():
 
     img_dir_path = current_dir + '/data/yoga/img_aug_test/' #/data/yoga/img_aug'
     txt_dir_path = current_dir + '/data/yoga/txt'
-    model_dir_path = os.getcwd()+ '/final_models'
+    model_dir_path = os.getcwd()+ '/final_models' 
 
     img_width = 64
     img_height = 64
@@ -40,14 +47,17 @@ def main():
     from yogan.library.utility.img_cap_loader import load_normalized_img_and_its_text
     from yogan.library.utility.ssim import ssim_score
 
+    # gets normalized training images and text description  embeddings as pairs
     image_label_pairs = load_normalized_img_and_its_text(img_dir_path, txt_dir_path, img_width=img_width, img_height=img_height)
     shuffle(image_label_pairs)
 
     gan = DCGan()
-
-    gan_list=['14012020_2131_45','epoch-4950-03012020_1216_55','15012020_2205_37','16012020_1756_32','16012020_2257_39']
-
-
+    
+    # modify this list to model name prefix incase you train a new model which gets saved in /final_models
+    gan_list=['agnistambhasana-epoch-5000-30012020_2203_30',
+          'bitilasana-epoch-5000-01022020_0024_01',
+         'bhujapidasana-epoch-5000-30012020_2205_26']
+    
     class_list=['pasasana','agnistambhasana','bhujapidasana','bitilasana','matsyasana']
     model_dict = dict(zip(class_list,gan_list))
     ###
@@ -64,7 +74,9 @@ def main():
 
 
         image.save(normalized_image_dir)
-        ### Added on 19/01/2020
+        
+        ## Approach 1 inference using text based NN to get yoga class names  + GAN and generate images from text description.
+        # loads text based NN(text data bag of words to yoga pose name) from pickled model file
         class_predicted = load_text_model(text,pickle_path,YOGA_CLASS)
         print(f"Model chosen is {class_predicted,model_dict[class_predicted]}")
         gan.load_model(model_dir_path,model_dict[class_predicted])
@@ -75,7 +87,9 @@ def main():
         k=0
         generated_images_dir=[]
         ssim_scores=[]
-
+        
+        ## Approach 2 Ensemble approach 
+        # emsemble approach where its loads each pose GAN model and generates image for given text 
         for model_name in gan_list:
             gan.load_model(model_dir_path,model_name)
             generated_images = gan.generate_image_from_text(text)
@@ -83,7 +97,8 @@ def main():
             generated_images.save(generated_image_dir)
             generated_images_dir.append(generated_image_dir)
             k+=1
-
+            
+        # ssim score between normalized ground truth and generated image
         for j in generated_images_dir:
             ssim_scores.append([j,ssim_score(normalized_image_dir,j)])
         predicted_image,score=max(ssim_scores, key = lambda x: x[1])
