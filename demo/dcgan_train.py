@@ -1,3 +1,9 @@
+'''
+Training script for YoGAN.
+
+'''
+
+
 import sys
 import os
 import numpy as np
@@ -5,22 +11,24 @@ from random import shuffle
 
 
 def main():
-
+    
     current_dir = os.path.dirname(__file__)
     sys.path.append(os.path.join(current_dir, '..'))
     current_dir = current_dir if current_dir is not '' else '.'
-
+    
+    # Augmented training images directories and yoga description text directories.
     img_dir_path = current_dir + '/data/yoga/img_aug'
     txt_dir_path = current_dir + '/data/yoga/txt'
     model_dir_path = current_dir + '/models'
 
-    img_width = 64#256
-    img_height = 64#256 large size of 256 leads to  ram alloc error
+    img_width = 64 # 256
+    img_height = 64 #256 large size of 256 leads to  ram alloc error
     img_channels = 3
 
     from yogan.library.dcgan import DCGan
+    # The below module normalizes training images and pairs it with its text description.
     from yogan.library.utility.img_cap_loader import load_normalized_img_and_its_text
-
+    
     image_label_pairs = load_normalized_img_and_its_text(img_dir_path, txt_dir_path, img_width=img_width, img_height=img_height)
     shuffle(image_label_pairs)
 
@@ -29,11 +37,15 @@ def main():
     gan.img_height = img_height
     gan.img_channels = img_channels
     gan.random_input_dim = 100
-    gan.glove_source_dir_path = './very_large_data'
+    gan.glove_source_dir_path = './very_large_data' # glove embeddings file
 
     batch_size = 51
     epochs = 8000
     print("epochs,batch_size",epochs,batch_size)
+    
+    # during training we store intermediate snapshots  given by "snapshot_interval" parameter 
+    # make sure "snapshots" directory under YoGan/demo/data/ has been created before you start training.
+    
     gan.fit(model_dir_path=model_dir_path, image_label_pairs=image_label_pairs,
             snapshot_dir_path=current_dir + '/data/snapshots',
             snapshot_interval=100,
