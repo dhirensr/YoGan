@@ -134,6 +134,10 @@ def run():
 
 
 def load_text_model(yoga_text,pickle_path,yoga_class):
+    '''
+    Loads count vectorizer model for bag of words based
+    text neural network used in evaluation approach2 to get yoga class names.
+    '''
     model=make_model()
     with open(pickle_path,"rb") as f:
         cv=pickle.load(f)
