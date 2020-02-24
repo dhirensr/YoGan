@@ -39,6 +39,9 @@ We have uploaded all the models in the directory final_models. If one wants to t
 * YoGan/demo/dcgan_train.py
 
 ## Data directories
+##### Refer following Scripts:
+* YoGan/demo/data/create_pos_dir.py
+* YoGan/demo/data/augment_data.py
 ##### Image data:
 * YoGan/demo/data/yoga/img
 
