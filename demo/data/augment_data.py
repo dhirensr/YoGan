@@ -1,5 +1,7 @@
-#could be issue in output image file name bug in my script :P
-# refer https://www.tensorflow.org/tutorials/images/classification
+'''
+Data augmentation  script using Keras ImageDataGenerator.
+
+'''
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 import os
 from matplotlib import pyplot as plt
@@ -9,10 +11,15 @@ from matplotlib import pyplot
 from numpy import expand_dims
 
 def augment_images(image_directory,fpath,fname,batch_size):
+	
+    '''
+    Augmentations used: Rotation, horizontal flip,zoom,vertical shift.
+    
+    '''
     im_gen = ImageDataGenerator(rotation_range=10,
                                 height_shift_range=.15,
                                 horizontal_flip=True,
-                                zoom_range=[0.75,1.0]) # rescaling need to check required or not
+                                zoom_range=[0.75,1.0]) 
     if len(fname)==0:
         return
     img = load_img(fpath+fname+'.png')
@@ -28,7 +35,10 @@ def augment_images(image_directory,fpath,fname,batch_size):
 
 
 def generate():
-    path = '/yoga/img_aug_test/'# '/yoga/img_aug_train/'#'/yoga/img_aug_test/'
+    '''
+    Iterates through each yoga pose directory and applies augmentation.
+    '''
+    path = '/yoga/img_aug_test/'
     pwd = os.getcwd()
     read_directory=pwd+'/yoga/img/'
     yoga_dir =os.listdir(pwd+path)
