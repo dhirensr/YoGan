@@ -1,3 +1,9 @@
+'''
+Utility script to generate  Structural Similarity between 
+generated and training images to evaluate 
+image quality.
+'''
+
 from skimage import data, img_as_float
 from skimage.metrics import structural_similarity as ssim
 import skimage.io as sio
