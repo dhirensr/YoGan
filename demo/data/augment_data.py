@@ -37,8 +37,16 @@ def augment_images(image_directory,fpath,fname,batch_size):
 def generate():
     '''
     Iterates through each yoga pose directory and applies augmentation.
+    use following destination paths:
+    
+    a)To generate augmented test samples:
+    path = '/yoga/img_aug_test/' 
+    
+    b)To generate augmented training samples:
+    path = '/yoga/img_aug_train/'
     '''
-    path = '/yoga/img_aug_test/'
+    path = '/yoga/img_aug_test/' # or '/yoga/img_aug_train/'
+	
     pwd = os.getcwd()
     read_directory=pwd+'/yoga/img/'
     yoga_dir =os.listdir(pwd+path)
