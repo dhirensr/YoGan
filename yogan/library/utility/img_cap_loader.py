@@ -1,3 +1,7 @@
+'''
+Utility file to load normalizd images and the text descriptions.
+'''
+
 import os
 import numpy as np
 from keras.preprocessing.image import img_to_array, load_img
@@ -9,6 +13,9 @@ from PIL import Image
 
 pwd=os.getcwd()
 def load_normalized_img_and_its_text(img_dir_path, txt_dir_path, img_width, img_height):
+    '''
+    Iterates through image and text directories and pairs them up.
+    '''
     fnames= os.listdir(img_dir_path)
     images = dict((f,[]) for f in fnames)
     texts = dict()
@@ -30,7 +37,7 @@ def load_normalized_img_and_its_text(img_dir_path, txt_dir_path, img_width, img_
     result = []
 
     for name, img_path_list in images.items():
-
+        # If training single class models then pass only a single class name below.
         if(name in ['pasasana','bhujapidasana','bitilasana','matsyasana','agnistambhasana']): #load only these 5 classes as we have trained for 5 classes for now
             for img_path in img_path_list:
             #print(f"img_path={img_path}, name={name}")
