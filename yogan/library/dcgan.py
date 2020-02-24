@@ -36,6 +36,10 @@ def generate_c(x):
     return c
 
 class DCGan(object):
+    '''
+    DCGAN architecture class,
+    the generator and disciminator architectures belong here.
+    '''
     model_name = 'dc-gan'
 
     def __init__(self):
@@ -84,7 +88,7 @@ class DCGan(object):
                                       )(generator_layer)
             
 
-
+            # Deconvolution blocks for generator
             #block 1
             generator_layer = Conv2DTranspose(128, (5, 5), strides=(1, 1), padding='same', use_bias=False)(generator_layer)
             generator_layer = BatchNormalization()(generator_layer)
@@ -117,6 +121,8 @@ class DCGan(object):
             img_input2 = Input(shape=(self.img_width, self.img_height, self.img_channels))
 
             ## discriminator architecture
+            
+            # Convolution blocks for discriminator
             #### block 1
             img_layer2 = Conv2D(64, kernel_size=5,strides=(2, 2), padding='same')(img_input2)
             img_layer2 = LeakyReLU()(img_layer2)
@@ -156,6 +162,9 @@ class DCGan(object):
 
 
     def load_model(self, model_dir_path,model_name):
+        '''
+        Loads config, generator,discriminator, word embeddings here.
+        '''
         config_file_path = DCGan.get_config_file_path(model_dir_path)
         self.config = np.load(config_file_path).item()
         self.img_width = self.config['img_width']
@@ -165,6 +174,7 @@ class DCGan(object):
         self.text_input_dim = self.config['text_input_dim']
         self.glove_source_dir_path = self.config['glove_source_dir_path']
         self.create_model()
+        # Loads glove embeddings for text input.
         self.glove_model.load(self.glove_source_dir_path, embedding_dim=self.text_input_dim)
         ### loading all models
         ## naming is currently bad but will be changed because currently which date corresponds to which model is not known
