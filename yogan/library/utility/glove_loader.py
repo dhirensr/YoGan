@@ -1,3 +1,7 @@
+'''
+Utility script to automatically download glove embeddings if not found locally.
+'''
+
 import urllib.request
 import os
 import zipfile
