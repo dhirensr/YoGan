@@ -1,4 +1,10 @@
-
+'''
+One time run script to create test/train directories before image augmentation
+has been run to generate train and test images.
+1. Run this script.
+2. Run augment_data.py to generate augmented training samples.
+3. Run augment_data.py to generate augmented test samples.
+'''
 import os 
 path='yoga/img/'
 aug_path='yoga/'
