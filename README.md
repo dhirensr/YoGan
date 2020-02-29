@@ -35,7 +35,10 @@ You can edit these paths in this notebook.
 In the file dcgan_train.py we have the option to change the files of the dataset and also few more parameters like image width,height and channels of the image, the noise vector size ,number of epochs and batch size.
 
 ## Training the model
-We have uploaded all the models in the directory final_models. If one wants to train from scratch and generate the model then one can use the following script:
+We have uploaded all the models in the directory final_models. 
+One can download all the models ZIP file from https://drive.google.com/file/d/1jFjA01yMeLNQaheg97MFSHvZsHFaEN78/view?usp=sharing  and then extract to the demo/ folder and replace the final_models folder in the demo with the folder obtained from the downloaded ZIP file.
+
+If one wants to train from scratch and generate the model then one can use the following script:
 * YoGan/demo/dcgan_train.py
 
 ## Data directories
@@ -50,6 +53,10 @@ We have uploaded all the models in the directory final_models. If one wants to t
 
 ##### Text data
 * YoGan/demo/data/yoga/txt
+
+##### Models Directory:
+* YoGan/demo/final_models/
+
 
 ## Modify Architecture
 To tweak the architectecture edit the following script:
