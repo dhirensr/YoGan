@@ -38,7 +38,7 @@ networkx==2.4
 nltk==3.4.5
 numpy==1.16.1
 oauthlib==3.1.0
-opencv-python==4.1.2.30
+opencv-python==4.2.0.32
 opt-einsum==3.1.0
 pandas==0.25.3
 parso==0.5.2
